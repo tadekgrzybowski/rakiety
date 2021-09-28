@@ -24,7 +24,7 @@ class Rocket():
 
     def launch(self):
         while True:
-            if self.y > 780:
+            if self.y > 798:
             	print(self.y)
             self.main_calc()
             self.check_event()
@@ -40,7 +40,7 @@ class Rocket():
     def check_event(self):
  
         b_d = -(self.v**2) / (2 * self.g_a)
-        if round(b_d, 10) + round(self.y, 10) > self.x_k -0.05:
+        if round(b_d, 10) + round(self.y, 10) > self.x_k -0.1 and round(b_d, 10) + round(self.y, 10) < self.x_k:
             self.e_t = 0
       
 
