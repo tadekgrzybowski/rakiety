@@ -29,10 +29,10 @@ class Rocket():
             self.main_calc()
             self.check_event()
             self.append_data()
-            if self.y > self.x_k + 5 or self.y < -5:
+            if self.i > 7000:
                 break
-            if self.i > 70000:
-                break
+            if self.y < 1:
+                print(self.y)
 
     def main_calc(self):
         self.r_a = (self.e_t / self.r_m) + self.g_a
@@ -42,9 +42,9 @@ class Rocket():
     def check_event(self):
         b_d = -(self.v**2) / (2 * self.g_a)
         l_d = -(self.v_k**2 - self.v**2) / (2 * ((self.e_t_2 / self.r_m) + self.g_a))
-        if ((round(b_d) + round(self.y)) == self.x_k and self.e_t != 0):
+        if b_d + self.y > self.x_k and self.e_t != 0:
             self.e_t = 0
-        if round(self.y) - round(l_d) == 0 and self.v < 0:
+        if self.y - l_d >= 0 and self.v < 0 and self.y - l_d < (self.d_t * 100):
             self.e_t = self.e_t_2
    
     def append_data(self):
@@ -60,6 +60,7 @@ class Rocket():
         plt.show()
 
 if __name__ == '__main__':
-    rocket = Rocket(35000000, 3000000, 800, 0.001, 1)
+    rocket = Rocket(35000000, 3000000, 800, 0.01, 1)
     rocket.launch()
     rocket.plot()
+
