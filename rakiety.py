@@ -31,7 +31,7 @@ class Rocket():
             self.append_data()
             if self.y > self.x_k + 5 or self.y < -5:
                 break
-            if self.i > 100000:
+            if self.i > 70000:
                 break
 
     def main_calc(self):
@@ -44,10 +44,8 @@ class Rocket():
         l_d = -(self.v_k**2 - self.v**2) / (2 * ((self.e_t_2 / self.r_m) + self.g_a))
         if ((round(b_d) + round(self.y)) == self.x_k and self.e_t != 0):
             self.e_t = 0
-            print("elo")
         if round(self.y) - round(l_d) == 0 and self.v < 0:
             self.e_t = self.e_t_2
-            print(self.y, l_d, self.v)
    
     def append_data(self):
         self.i += 1
