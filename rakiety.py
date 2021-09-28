@@ -10,7 +10,7 @@ class Rocket():
         self.d_t = delta_czas
         self.y = 0
         self.v = 0
-        self.g_a = 10 # przyspieszenie ziemskie
+        self.g_a = -9.8 # przyspieszenie ziemskie
         self.r_a = 0 # przyspieszenie rakiety
         self.i = 0
         self.data = [self.d_t, [], [], self.r_a, []]
@@ -24,14 +24,16 @@ class Rocket():
                 break
 
     def main_calc(self):
-        self.r_a = (self.e_t / self.r_m) - self.g_a
+        self.r_a = (self.e_t / self.r_m) + self.g_a
         self.v += self.r_a * self.d_t
-        self.y += self.v * self.d_t + ((self.r_a / self.d_t**2) / 2)
+        self.y += self.v * self.d_t
 
     def check_event(self):
-        b_d = self.y + self.v * (-self.v / -self.r_a) + ((-self.r_a*((-self.v / -self.r_a)**2)) / 2)
-        if round(b_d, 2) + round(self.y, 2) == self.x_k:
+ 
+        b_d = -(self.v**2) / (2 * self.g_a)
+        if round(b_d) + round(self.y) == self.x_k:
             self.e_t = 0
+            print(b_d, self.y)
 
     def append_data(self):
         self.i += 1
