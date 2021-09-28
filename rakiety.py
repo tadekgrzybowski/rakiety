@@ -2,6 +2,13 @@ import pygame
 import numpy
 import matplotlib.pyplot as plt
 
+#799.8320866667023
+#799.8321333333689
+#799.8321333333689
+
+
+
+
 class Rocket():
     def __init__(self, engine_thrust, rocket_mass, destination, delta_czas):
         self.e_t = engine_thrust
@@ -17,10 +24,12 @@ class Rocket():
 
     def launch(self):
         while True:
+            if self.y > 780:
+            	print(self.y)
             self.main_calc()
             self.check_event()
             self.append_data()
-            if self.y > self.x_k or self.y < 0:
+            if self.y > self.x_k + 5 or self.y < 0:
                 break
 
     def main_calc(self):
@@ -31,9 +40,9 @@ class Rocket():
     def check_event(self):
  
         b_d = -(self.v**2) / (2 * self.g_a)
-        if round(b_d) + round(self.y) == self.x_k:
+        if round(b_d, 10) + round(self.y, 10) > self.x_k -0.05:
             self.e_t = 0
-            print(b_d, self.y)
+      
 
     def append_data(self):
         self.i += 1
@@ -48,6 +57,6 @@ class Rocket():
         plt.show()
 
 if __name__ == '__main__':
-    rocket = Rocket(35000000, 3000000, 800, 0.01)
+    rocket = Rocket(35000000, 3000000, 800, 0.001)
     rocket.launch()
     rocket.plot()
